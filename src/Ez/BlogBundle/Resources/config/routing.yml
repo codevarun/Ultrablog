@@ -1,3 +1,4 @@
 EzBlogBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: EzBlogBundle:Default:index }
+    resource: "@EzBlogBundle/Controller/"
+    type: annotation
+    prefix: /

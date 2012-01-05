@@ -3,7 +3,7 @@
 namespace Ez\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use Ez\BlogBundle\Entity\Tag;
 
 /**
@@ -21,7 +21,14 @@ class Post {
 	public $id;
 
 	/**
+	 * @ORM\ManyToOne(targetEntity="User")
+	 * @ORM\JoinColumn(name="author_user_id", referencedColumnName="id", nullable=false)
+	 */
+	public $author;
+
+	/**
 	 * @ORM\Column(type="string", length="255", name="title")
+	 * @Assert\NotBlank()
 	 */
 	public $title;
 
@@ -29,6 +36,12 @@ class Post {
 	 * @ORM\Column(type="string", length="255", name="title_slug")
 	 */
 	public $titleSlug;
+
+	/**
+	 * @ORM\Column(type="text", name="content")
+	 * @Assert\NotBlank()
+	 */
+	public $content;
 
 	/**
 	 * @ORM\ManyToMany(targetEntity="Tag")
@@ -40,7 +53,7 @@ class Post {
 	 */
 	public $createdAt;
 
-	
+
 
 	public function getTags() {
 		return $this->tags->toArray();

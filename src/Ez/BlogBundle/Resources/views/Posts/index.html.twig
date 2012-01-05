@@ -1,0 +1,15 @@
+{% extends 'EzBlogBundle::layout.html.twig' %}
+
+{% block content %}
+	{% for post in posts %}
+		<article>
+			<h2>{{ post.title }}</h2>
+			<h3>By: {{ post.author.username }} on {{ post.createdAt.format('d-M-Y') }}</h3>
+			<div>
+				{{ post.content|nl2br }}
+			</div>
+		</article>
+	{% endfor %}
+
+	<p><a href="{{ path('add_post') }}">Add Post</a></p>
+{% endblock %}

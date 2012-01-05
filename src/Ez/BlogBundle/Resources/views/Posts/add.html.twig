@@ -1,0 +1,12 @@
+{% extends 'EzBlogBundle::layout.html.twig' %}
+
+{% block content %}
+	
+	<form action method="post" {{ form_enctype(form) }} novalidate>
+		{{ form_widget(form) }}
+
+		<input type="submit" />
+	</form>
+
+	<p><a href="{{ path('posts') }}">Back</a></p>
+{% endblock %}
