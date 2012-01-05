@@ -18,8 +18,9 @@ framework:
 
 # Twig Configuration
 twig:
-    debug:            %kernel.debug%
+    debug: %kernel.debug%
     strict_variables: %kernel.debug%
+    autoescape: ~
 
 # Assetic Configuration
 assetic:
