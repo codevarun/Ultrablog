@@ -21,7 +21,7 @@ class Post {
 	public $id;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="User")
+	 * @ORM\ManyToOne(targetEntity="User", inversedBy="posts")
 	 * @ORM\JoinColumn(name="author_user_id", referencedColumnName="id", nullable=false)
 	 */
 	public $author;

@@ -7,59 +7,58 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
-use Ez\BlogBundle\Entity\Post;
-use Ez\BlogBundle\Form\PostForm;
+use Ez\BlogBundle\Entity\User;
+use Ez\BlogBundle\Form\UserForm;
 
 /**
-* @Route("/posts")
+* @Route("/users")
 */
-class PostsController extends BaseController {
+class UsersController extends BaseController {
 
 	/**
-	 * @Route("/", name="posts")
+	 * @Route("/{user}", name="view_user")
+	 * @Template()
+	 */
+	public function viewAction( $user ) {
+		$user = $this->getRepo('User')->find($user);
+
+		return get_defined_vars();
+	}
+
+	/**
+	 * @Route("/", name="users")
 	 * @Template()
 	 */
 	public function indexAction() {
-		$posts = $this->getRepo('Post')->findBy(array(), array('id' => 'DESC'));
+		$users = $this->getRepo('User')->findBy(array(), array('id' => 'DESC'));
 
 		return get_defined_vars();
 	}
 
 	/**
-	 * @Route("/{post}", name="view_post")
-	 * @Template()
-	 */
-	public function viewAction( $post ) {
-		$post = $this->getRepo('Post')->find($post);
-exit('title: ' . $post->title);
-
-		return get_defined_vars();
-	}
-
-	/**
-	 * @Route("/add", name="add_post")
+	 * @Route("/add", name="add_user")
 	 * @Template()
 	 */
 	public function addAction( Request $request ) {
-		$post = new Post;
-		$form = $this->createForm(new PostForm(), $post);
+		$user = new User;
+		$form = $this->createForm(new UserForm(), $user);
 
 		if ($request->getMethod() == 'POST') {
 			$form->bindRequest($request);
 
 			if ($form->isValid()) {
-				$post->author = $this->getRepo('User')->find(1);
-				$post->titleSlug = '';
+				//$user->titleSlug = '';
 
 				$em = $this->getDoctrine()->getEntityManager();
-				$em->persist($post);
+				$em->persist($user);
 				$em->flush();
 
-				return $this->redirect($this->generateUrl('posts'));
+				return $this->redirect($this->generateUrl('users'));
 			}
 		}
 
 		$form = $form->createView();
+
 		return get_defined_vars();
 	}
 }

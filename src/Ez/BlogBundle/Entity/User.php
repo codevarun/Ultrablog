@@ -52,6 +52,16 @@ class User implements UserInterface {
 	 */
 	protected $userRoles;
 
+	/**
+	 * @ORM\Column(type="string", name="full_name")
+	 */
+	public $fullName;
+
+	/**
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="author")
+     */
+	public $posts;
+
 	public function getRoles() {
 		return $this->getUserRoles()->toArray();
 	}

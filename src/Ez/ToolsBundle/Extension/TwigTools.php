@@ -1,26 +1,69 @@
 <?php
 namespace Ez\ToolsBundle\Extension;
 
-class TwigTools extends \Twig_Extension {
+use Twig_Extension;
+use Twig_Filter_Method;
+use Twig_Function_Method;
 
+class TwigTools extends Twig_Extension {
+
+	/**
+	 * Definitions
+	 */
+
+	// extension name
+	public function getName() {
+		return 'TwigTools';
+	}
+
+	// filters
 	public function getFilters() {
 		return array(
-			'dump' => new \Twig_Filter_Method($this, 'dump'),
-			'join' => new \Twig_Filter_Method($this, 'join'),
-			'nl2br' => new \Twig_Filter_Method($this, 'nl2br'),
+			// debug
+			'dump' => new Twig_Filter_Method($this, 'dump'),
+			'print_r' => new Twig_Filter_Method($this, 'print_r'),
+
+			// markup
+			'nl2br' => new Twig_Filter_Method($this, 'nl2br'),
+			'join' => new Twig_Filter_Method($this, 'join'),
+
+			// escape
+			'html' => new Twig_Filter_Method($this, 'html'),
+			'javascript' => new Twig_Filter_Method($this, 'javascript'),
 		);
 	}
 
-	public function getTags() {
+	// functions
+	public function getFunctions() {
 		return array(
-			'page_title' => new \Twig_Filter_Method($this, 'page_title'),
+			'link' => new Twig_Function_Method($this, 'link'),
 		);
 	}
 
-	public function page_title() {
-		return 'oele';
+
+	/**
+	 * Callbacks
+	 */
+
+	// link
+	public function link( $label, $path, $options = array() ) {
+		return '<a href="' . $path . '">' . $label . '</a>';
 	}
 
+	// link
+	public function html( $text ) {
+		$flags = ENT_COMPAT;
+		defined('ENT_HTML5') && $flags |= ENT_HTML5;
+
+		return htmlspecialchars($text, $flags, 'UTF-8');
+	}
+
+	// link
+	public function javascript( $text ) {
+		return addslashes($text);
+	}
+
+	// link
 	public function join( $objects, $glue = ', ', $lastGlue = null ) {
 		null === $lastGlue && $lastGlue = $glue;
 
@@ -32,18 +75,20 @@ class TwigTools extends \Twig_Extension {
 		return implode($glue, $objects) . $last;
 	}
 
+	// link
 	public function dump($var) {
 		var_dump($var);
 		return '';
 	}
-	
-	public function nl2br($text) {
-		return nl2br($text);
+
+	// link
+	public function print_r($var) {
+		return print_r($var, 1);
 	}
 
-	public function getName()
-	{
-		return 'TwigTools';
+	// link
+	public function nl2br($text) {
+		return nl2br($text);
 	}
 
 }
