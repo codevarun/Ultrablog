@@ -1,0 +1,18 @@
+{% extends 'EzBlogBundle::layout.html.twig' %}
+
+{% block content %}
+
+	<h1>Users</h1>
+    {% for user in users %}
+      <h2>{{ user.fullName }}</h2>
+
+      <h3>Posts</h3>
+
+      <ul>
+        {% for post in user.posts %}
+          <li>{{ link(post.title, path('view_post', {"post": post.id})) }}</li>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+
+{% endblock %}

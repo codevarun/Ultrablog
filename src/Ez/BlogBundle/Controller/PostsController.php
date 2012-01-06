@@ -45,8 +45,8 @@ class PostsController extends BaseController {
 			$form->bindRequest($request);
 
 			if ($form->isValid()) {
-				$post->author = $this->getRepo('User')->find(1);
-				$post->titleSlug = '';
+				$post->setAuthor($this->getRepo('User')->find(1));
+				$post->setTitleSlug('');
 
 				$em = $this->getDoctrine()->getEntityManager();
 				$em->persist($post);
