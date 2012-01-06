@@ -21,7 +21,15 @@ class PostsController extends BaseController {
 	 */
 	public function indexAction() {
 		$posts = $this->getRepo('Post')->findBy(array(), array('id' => 'DESC'));
+		return get_defined_vars();
+	}
 
+	/**
+	 * @Route("/{post}", name="view_post", requirements={"post" = "\d+"})
+	 * @Template()
+	 */
+	public function viewAction( $post ) {
+		$post = $this->getRepo('Post')->find($post);
 		return get_defined_vars();
 	}
 
@@ -49,15 +57,6 @@ class PostsController extends BaseController {
 		}
 
 		$form = $form->createView();
-		return get_defined_vars();
-	}
-
-	/**
-	 * @Route("/{post}", name="view_post")
-	 * @Template()
-	 */
-	public function viewAction( $post ) {
-		$post = $this->getRepo('Post')->find($post);
 		return get_defined_vars();
 	}
 }

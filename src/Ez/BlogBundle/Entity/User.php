@@ -20,32 +20,27 @@ class User implements UserInterface {
 	 * @ORM\Column(type="integer", name="id")
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 */
-	public $id;
-
-	/**
-	 * ORM\Column(type="string", length="255", name="username", unique=true)
-	 */
-	//public $username;
+	protected $id;
 
 	/**
 	 * @ORM\Column(type="string", length="255", name="password")
 	 */
-	public $password;
+	protected $password;
 
 	/**
 	 * @ORM\Column(type="string", length="255", name="salt")
 	 */
-	public $salt;
+	protected $salt;
 
 	/**
 	 * @ORM\Column(type="string", length="255", name="email", unique=true)
 	 */
-	public $email;
+	protected $email;
 
 	/**
 	 * @ORM\Column(type="datetime", name="created_at")
 	 */
-	public $createdAt;
+	protected $createdAt;
 
 	/**
 	 * @ORM\ManyToMany(targetEntity="Role")
@@ -55,7 +50,7 @@ class User implements UserInterface {
 	/**
 	 * @ORM\Column(type="string", name="full_name")
 	 */
-	public $fullName;
+	protected $fullName;
 
 	/**
      * @ORM\OneToMany(targetEntity="Post", mappedBy="author")
@@ -71,18 +66,6 @@ class User implements UserInterface {
 		$this->createdAt = new \DateTime();
 	}
 
-	public function getUsername() {
-		return $this->email;
-	}
-
-	public function getSalt() {
-		return $this->salt;
-	}
-
-	public function getPassword() {
-		return $this->password;
-	}
-
 	public function eraseCredentials() {
 	}
 
@@ -91,4 +74,145 @@ class User implements UserInterface {
 		return md5($this->email) == md5($user->email);
 	}
 
+	public function getUserName() {
+		return $this->email;
+	}
+	
+	public function getPassword() {
+		return $this->password;
+	}
+	
+	public function getSalt() {
+		return $this->salt;
+	}
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param datetime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return datetime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set fullName
+     *
+     * @param string $fullName
+     */
+    public function setFullName($fullName)
+    {
+        $this->fullName = $fullName;
+    }
+
+    /**
+     * Get fullName
+     *
+     * @return string 
+     */
+    public function getFullName()
+    {
+        return $this->fullName;
+    }
+
+    /**
+     * Add userRoles
+     *
+     * @param Ez\BlogBundle\Entity\Role $userRoles
+     */
+    public function addRole(\Ez\BlogBundle\Entity\Role $userRoles)
+    {
+        $this->userRoles[] = $userRoles;
+    }
+
+    /**
+     * Get userRoles
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getUserRoles()
+    {
+        return $this->userRoles;
+    }
+
+    /**
+     * Add posts
+     *
+     * @param Ez\BlogBundle\Entity\Post $posts
+     */
+    public function addPost(\Ez\BlogBundle\Entity\Post $posts)
+    {
+        $this->posts[] = $posts;
+    }
+
+    /**
+     * Get posts
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
 }
