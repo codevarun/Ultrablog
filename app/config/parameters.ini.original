@@ -2,15 +2,15 @@
 ; by enclosing the key with % (like %database_user%)
 ; Comments start with ';', as in php.ini
 [parameters]
-    database_driver="pdo_mysql"
-    database_host="localhost"
-    database_port=""
-    database_name="ultrablog"
-    database_user="ub"
-    database_password="bu2k11"
-    mailer_transport="smtp"
-    mailer_host="localhost"
-    mailer_user=""
-    mailer_password=""
-    locale="en"
-    secret="3a0e559b379ba20733bd1dfd276498b4f7c0cdfc"
+    database_driver   = pdo_mysql
+    database_host     = localhost
+    database_port     =
+    database_name     = symfony
+    database_user     = root
+    database_password =
+    mailer_transport  = smtp
+    mailer_host       = localhost
+    mailer_user       =
+    mailer_password   =
+    locale            = en
+    secret            = ThisTokenIsNotSoSecretChangeIt

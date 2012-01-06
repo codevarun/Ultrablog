@@ -26,17 +26,6 @@ class PostsController extends BaseController {
 	}
 
 	/**
-	 * @Route("/{post}", name="view_post")
-	 * @Template()
-	 */
-	public function viewAction( $post ) {
-		$post = $this->getRepo('Post')->find($post);
-exit('title: ' . $post->title);
-
-		return get_defined_vars();
-	}
-
-	/**
 	 * @Route("/add", name="add_post")
 	 * @Template()
 	 */
@@ -60,6 +49,15 @@ exit('title: ' . $post->title);
 		}
 
 		$form = $form->createView();
+		return get_defined_vars();
+	}
+
+	/**
+	 * @Route("/{post}", name="view_post")
+	 * @Template()
+	 */
+	public function viewAction( $post ) {
+		$post = $this->getRepo('Post')->find($post);
 		return get_defined_vars();
 	}
 }
