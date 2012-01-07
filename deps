@@ -59,3 +59,7 @@
     git=http://github.com/symfony/AsseticBundle.git
     target=/bundles/Symfony/Bundle/AsseticBundle
     version=v1.0.1
+
+[EzToolsBundle]
+    git=http://github.com/jorisdejong85/EzToolsBundle.git
+    target=/bundles/Ez/ToolsBundle
