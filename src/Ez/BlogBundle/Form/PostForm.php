@@ -12,9 +12,9 @@ class PostForm extends AbstractType {
 
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $builder
-			->add('title', 'text', array('required' => true))
-			->add('content', 'textarea', array('required' => true));
+        $builder->add('title', 'text', array('required' => true));
+		$builder->add('content', 'textarea', array('required' => true));
+		$builder->add('tagsString', 'text', array('required' => true));
     }
 	
 	public function getName(){ 

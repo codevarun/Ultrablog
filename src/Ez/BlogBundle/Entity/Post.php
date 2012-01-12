@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Ez\BlogBundle\Entity\Tag;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -34,6 +35,7 @@ class Post {
 	protected $title;
 
 	/**
+	 * @Gedmo\Slug(fields={"title"})
 	 * @ORM\Column(type="string", length="255", name="title_slug")
 	 */
 	protected $titleSlug;
@@ -58,12 +60,12 @@ class Post {
 		$this->tags = new ArrayCollection();
 		$this->createdAt = new \DateTime();
 	}
-	
+
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -83,7 +85,7 @@ class Post {
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -103,7 +105,7 @@ class Post {
     /**
      * Get titleSlug
      *
-     * @return string 
+     * @return string
      */
     public function getTitleSlug()
     {
@@ -123,7 +125,7 @@ class Post {
     /**
      * Get content
      *
-     * @return text 
+     * @return text
      */
     public function getContent()
     {
@@ -143,7 +145,7 @@ class Post {
     /**
      * Get createdAt
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreatedAt()
     {
@@ -163,7 +165,7 @@ class Post {
     /**
      * Get author
      *
-     * @return Ez\BlogBundle\Entity\User 
+     * @return Ez\BlogBundle\Entity\User
      */
     public function getAuthor()
     {
@@ -183,10 +185,16 @@ class Post {
     /**
      * Get tags
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getTags()
     {
         return $this->tags;
     }
+
+	public function getTagsString() {
+print_r($this);
+		return implode(' ', $this->getTags()->toArray());
+	}
+
 }

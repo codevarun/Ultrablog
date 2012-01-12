@@ -109,4 +109,8 @@ class Tag {
     {
         return $this->posts;
     }
+	
+	public function __toString() {
+		return $this->title;
+	}
 }

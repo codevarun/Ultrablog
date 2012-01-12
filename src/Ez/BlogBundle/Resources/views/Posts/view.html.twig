@@ -2,10 +2,13 @@
 
 {% block content %}
 	<article>
-		<h1>{{ post.title|html }}</h1>
+		<h1>{{ post.title }}</h1>
 		<h3>By: {{ link(post.author.fullName, path('view_user', {"user": post.author.id})) }} on {{ post.createdAt.format('d-M-Y') }}</h3>
 		<div>
-			{{ post.content|html|nl2br }}
+			{{ post.content|html|nl2br|raw }}
+		</div>
+		<div>
+			{{ link('Edit', path('edit_post', {"post": post.id})) }}
 		</div>
 	</article>
 

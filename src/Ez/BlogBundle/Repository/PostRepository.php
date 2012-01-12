@@ -1,7 +1,7 @@
 <?php
 namespace Ez\BlogBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Ez\ToolsBundle\Repository\BaseEntityRepository;
 
-class PostRepository extends EntityRepository {
+class PostRepository extends BaseEntityRepository {
 }

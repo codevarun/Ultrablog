@@ -15,6 +15,8 @@ $loader->registerNamespaces(array(
     'Assetic'          => __DIR__.'/../vendor/assetic/src',
     'Metadata'         => __DIR__.'/../vendor/metadata/src',
     'Ez'               => __DIR__.'/../vendor/bundles',
+    'Stof'             => __DIR__.'/../vendor/bundles',
+    'Gedmo'            => __DIR__.'/../vendor/gedmo-doctrine-extensions/lib',
 ));
 $loader->registerPrefixes(array(
     'Twig_Extensions_' => __DIR__.'/../vendor/twig-extensions/lib',
@@ -32,6 +34,9 @@ $loader->registerNamespaceFallbacks(array(
     __DIR__.'/../src',
 ));
 $loader->register();
+
+//$classLoader = new \Doctrine\Common\ClassLoader('Gedmo', __DIR__ . "/../vendor/doctrine-extensions/lib");
+//$classLoader->register();
 
 AnnotationRegistry::registerLoader(function($class) use ($loader) {
     $loader->loadClass($class);

@@ -48,9 +48,29 @@ class PostsController extends BaseController {
 				$post->setAuthor($this->getRepo('User')->find(1));
 				$post->setTitleSlug('');
 
-				$em = $this->getDoctrine()->getEntityManager();
-				$em->persist($post);
-				$em->flush();
+				$this->saveEntity($post);
+
+				return $this->redirect($this->generateUrl('posts'));
+			}
+		}
+
+		$form = $form->createView();
+		return get_defined_vars();
+	}
+
+	/**
+	 * @Route("/{post}/edit", name="edit_post")
+	 * @Template()
+	 */
+	public function editAction( Request $request, $post ) {
+		$post = $this->getRepo('Post')->find($post);
+		$form = $this->createForm(new PostForm(), $post);
+
+		if ($request->getMethod() == 'POST') {
+			$form->bindRequest($request);
+
+			if ($form->isValid()) {
+				$this->saveEntity($post);
 
 				return $this->redirect($this->generateUrl('posts'));
 			}

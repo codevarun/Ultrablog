@@ -4,10 +4,10 @@
 	<h1>Posts</h1>
 	{% for post in posts %}
 		<article>
-			<h2>{{ post.title|html }}</h2>
-			<h3>By: {{ link(post.author.fullName, path('view_user', {"user": post.author.id})) }} on {{ post.createdAt.format('d-M-Y') }}</h3>
+			<h2>{{ link(post.title, path('view_post', {"post": post.id})) }}</h2>
+			<h3>By: {{ link(post.author.fullName, path('view_user', {"user": post.author.id})) }} on {{ post.createdAt.format('d-M-Y') }} ({{ link('Edit', path('edit_post', {'post':post.id}), {'class':'button'}) }})</h3>
 			<div>
-				{{ post.content|html|nl2br }}
+				{{ post.content|html|nl2br|raw }}
 			</div>
 		</article>
 	{% endfor %}
