@@ -1,5 +1,4 @@
 <?php
-
 namespace Ez\BlogBundle\Controller;
 
 use Ez\ToolsBundle\Controller\BaseController;
@@ -45,6 +44,9 @@ class PostsController extends BaseController {
 			$form->bindRequest($request);
 
 			if ($form->isValid()) {
+				$postService = $this->get('post_service');
+				$post->setTags($postService->getNewOrExistingTags($post->getTagStrings()));
+
 				$post->setAuthor($this->getRepo('User')->find(1));
 				$post->setTitleSlug('');
 
@@ -70,6 +72,9 @@ class PostsController extends BaseController {
 			$form->bindRequest($request);
 
 			if ($form->isValid()) {
+				$postService = $this->get('post_service');
+				$post->setTags($postService->getNewOrExistingTags($post->getTagStrings()));
+
 				$this->saveEntity($post);
 
 				return $this->redirect($this->generateUrl('posts'));

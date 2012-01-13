@@ -47,9 +47,14 @@ class Post {
 	protected $content;
 
 	/**
-	 * @ORM\ManyToMany(targetEntity="Tag")
+	 * @ORM\ManyToMany(targetEntity="Tag", cascade={"persist"})
      */
 	protected $tags;
+
+	/**
+	 * 
+     */
+	protected $tagsString;
 
 	/**
 	 * @ORM\Column(type="datetime", name="created_at")
@@ -173,6 +178,14 @@ class Post {
     }
 
     /**
+     * 
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
+
+    /**
      * Add tags
      *
      * @param Ez\BlogBundle\Entity\Tag $tags
@@ -193,8 +206,15 @@ class Post {
     }
 
 	public function getTagsString() {
-print_r($this);
 		return implode(' ', $this->getTags()->toArray());
+	}
+
+	public function setTagsString($tags) {
+		$this->tagsString = array_filter(explode(' ', $tags));
+	}
+
+	public function getTagStrings() {
+		return $this->tagsString;
 	}
 
 }

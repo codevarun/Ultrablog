@@ -9,6 +9,9 @@
 			<div>
 				{{ post.content|html|nl2br|raw }}
 			</div>
+			<div>
+			{{ post.tagsString }}
+			</div>
 		</article>
 	{% endfor %}
 

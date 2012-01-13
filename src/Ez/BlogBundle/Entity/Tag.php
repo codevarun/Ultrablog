@@ -5,6 +5,7 @@ namespace Ez\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 use Ez\BlogBundle\Entity\Post;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -31,19 +32,19 @@ class Tag {
 	protected $titleSlug;
 
 	/**
-     * @ORM\ManyToMany(targetEntity="Post", mappedBy="tags")
+     * @ORM\ManyToMany(targetEntity="Post", mappedBy="tags", cascade={"persist"})
      */
-	protected $posts;	
+	protected $posts;
 
 	public function __construct() {
 		$this->posts = new ArrayCollection();
 	}
-	
+
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -63,7 +64,7 @@ class Tag {
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -83,7 +84,7 @@ class Tag {
     /**
      * Get titleSlug
      *
-     * @return string 
+     * @return string
      */
     public function getTitleSlug()
     {
@@ -103,14 +104,15 @@ class Tag {
     /**
      * Get posts
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getPosts()
     {
         return $this->posts;
     }
-	
+
 	public function __toString() {
 		return $this->title;
 	}
+
 }

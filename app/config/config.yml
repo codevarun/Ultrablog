@@ -16,6 +16,11 @@ framework:
         default_locale: %locale%
         auto_start:     true
 
+services:
+    post_service:
+        class: Ez\BlogBundle\Service\PostService
+        arguments: [@doctrine]
+
 # Twig Configuration
 twig:
     debug: %kernel.debug%
